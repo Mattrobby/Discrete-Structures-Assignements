@@ -2,11 +2,11 @@
 
 ## Assignment 1
 
-Write a program in python which asks the user for a positive integer – the nth Fibonacci number the user would like calculated. The program then must calculate the value of $F(n)$ in 2 ways. The program must calculate it according to the recursive definition and then by using the explicit formula derived in class. The program should check that these two values match and return the value to the user.
+Write a program in python which asks the user for a positive integer – the $n^{th}$ Fibonacci number the user would like calculated. The program then must calculate the value of $F(n)$ in 2 ways. The program must calculate it according to the recursive definition and then by using the explicit formula derived in class. The program should check that these two values match and return the value to the user.
 
 ## Assignment 2
 
-Write a program that allows the user to choose to convert a number from base 16 to decimal or decimal to base $n$ (your program should have both functionalities). The program should then perform the relevant calculation and return it to the user. You must write the routine for the base conversion – you cannot use a pre-written routine from another library.
+Write a program that allows the user to choose to convert a number from $\text{base }16$ to decimal or decimal to $\text{base }n$ (your program should have both functionalities). The program should then perform the relevant calculation and return it to the user. You must write the routine for the base conversion – you cannot use a pre-written routine from another library.
 
 ## Assignment 3
 
