@@ -6,7 +6,7 @@ Write a program in python which asks the user for a positive integer – the $n^
 
 ## Assignment 2
 
-Write a program that allows the user to choose to convert a number from $\text{base }16$ to $\text{decimal}# or \text{decimal}$ to $\text{base }n$ (your program should have both functionalities). The program should then perform the relevant calculation and return it to the user. You must write the routine for the base conversion – you cannot use a pre-written routine from another library.
+Write a program that allows the user to choose to convert a number from $\text{base }16$ to $\text{decimal}$ or \text{decimal}$ to $\text{base }n$ (your program should have both functionalities). The program should then perform the relevant calculation and return it to the user. You must write the routine for the base conversion – you cannot use a pre-written routine from another library.
 
 ## Assignment 3
 
