@@ -29,12 +29,12 @@ formula_time_start = time.time()
 formula = fibonacci_formula(n)
 formula_time_end = time.time()
 
+formula_time = formula_time_end - formula_time_start
+print(f'Fibonacci Formula:   {formula}   Time: {formula_time}')
+
 recursive_time_start = time.time()
 recursive = fibonacci_recursive(n)
 recursive_time_end = time.time()
 
-formula_time = formula_time_end - formula_time_start
 recursive_time = recursive_time_end - formula_time_start
-
-print(f'Fibonacci Formula: {formula}\tTime: {formula_time}')
-print(f'Fibonacci Recursive: {recursive}\tTime: {recursive_time}')
+print(f'Fibonacci Recursive: {recursive}   Time: {recursive_time}')
