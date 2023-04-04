@@ -1,38 +1,49 @@
-def convert_base(number, base1, base2):
-    if base1 == base2:
-        return number
-
-    if base1 > base2:
-        big_to_small(number, base1, base2)
-
-    if base1 < base2:
-        small_to_big(number, base1, base2)
-
-def big_to_small(number, base1, base2):
-    
-
-def small_to_big(number, base1, base2):
-    pass 
-
 class InvalidNumberError(Exception):
     pass
 
 class NumberGreaterThanBase(Exception):
     pass
 
+def convert_base(number, original_base, new_base):
+    decimal = 0
+
+    if original_base == new_base:
+        return number
+    
+    # Convert input number to decimal
+    for i, digit in enumerate(number[::-1]):
+        decimal += digits.index(digit) * (original_base ** i)
+    
+    # Convert decimal to output base
+    output = ""
+    while decimal > 0:
+        digit = decimal % new_base
+        output = digits[digit] + output
+        decimal //= new_base
+    
+    return output
+
+
+digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
 while True:
     try:
-        number = float(input('==> Please enter the first number: '))
-        if number >= base1:
-            raise NumberGreaterThanBase('Your number can\'t be greater than the base')
+        number = input('==> Please enter the first number: ').upper()
 
-        base1 = int(input('==> Please enter the base for that number: '))
-        if base1 <= 0:
+        original_base = int(input('==> Please enter the base for that number: '))
+        if original_base <= 0:
            raise InvalidNumberError('Base must be greater than zero')
 
-        base2 = int(input('==> Please enter the base for that number: '))
-        if base2 <= 0:
+        new_base = int(input('==> Please enter the original_base you want to convert to: '))
+        if new_base <= 0:
            raise InvalidNumberError('Base must be greater than zero')
+
+        for digit in number:
+            if digit not in digits:
+                raise NumberGreaterThanBase(f'The digit {digit} is not a valid digit')
+
+            if digits.index(digit) >= original_base:
+                raise NumberGreaterThanBase(f'The digit {digit} is greater than base {original_base} allows')
 
         break
     except ValueError:
@@ -46,8 +57,13 @@ while True:
         print()
         print('Now Exiting :)')
         exit(0)
-    except: 
-       print('Unknown error occurred, please try again')
+#    except: 
+#       print('Unknown error occurred, please try again')
+
+
     print()
 
-answer = convert_base(number, base1, base2)
+digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+answer = convert_base(number, original_base, new_base)
+
+print(answer)
