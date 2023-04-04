@@ -1,3 +1,15 @@
+# Author: Matthew Stefanovic
+# 
+# This program takes user input for a number, its original base, 
+# and the base to convert it to. It then validates the input and
+# converts the number to the desired base. The program raises custom
+# exceptions for invalid inputs. The digits used for the number 
+# system are stored in a string. The program will continue to 
+# prompt the user for input until valid inputs are entered. 
+# Once valid inputs are entered, the program prints the converted number 
+# to the console.
+
+
 class InvalidNumberError(Exception):
     pass
 
