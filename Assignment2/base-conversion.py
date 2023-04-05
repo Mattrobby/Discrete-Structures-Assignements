@@ -69,8 +69,8 @@ while True:
         print()
         print('Now Exiting :)')
         exit(0)
-#    except: 
-#       print('Unknown error occurred, please try again')
+    except: 
+        print('Unknown error occurred, please try again')
 
 
     print()
