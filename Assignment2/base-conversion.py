@@ -41,6 +41,8 @@ digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 while True:
     try:
         number = input('==> Please enter the first number: ').upper()
+        if number == '':
+            raise ValueError()
 
         original_base = int(input('==> Please enter the base for that number: '))
         if original_base <= 0:
