@@ -77,7 +77,6 @@ while True:
 
     print()
 
-digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 answer = convert_base(number, original_base, new_base)
 
 print(answer)
