@@ -1,7 +1,5 @@
-from asciimatics.screen import Screen
-
-class Node: 
-    def __init__(self, name): 
+class Node:
+    def __init__(self, name):
         self.name = name
         self.adjacent = {}
 
@@ -24,14 +22,39 @@ class Graph:
             self.add_node(node2)
 
         self.nodes[node1].add_edge(self.nodes[node2], weight)
-        self.nodes[node2].add_edge(self.nodes[node2], weight)
+        self.nodes[node2].add_edge(self.nodes[node1], weight)
 
     def greedy(self, start_node):
-        self.start_node = self.nodes[start_node]
-        for node, weight in self.start_node.adjacent.items():
-            print(f"Node: {node.name} | Weight: {weight}")
+        start_node = current_node = self.nodes[start_node]
+        visited_nodes = set()
+        lowest = None
 
-def create_city_graph(): # NOTE: Used chatGPT to create this function 
+        while True:
+            for node, weight in current_node.adjacent.items():
+                if lowest is None:
+                    lowest = node
+                    continue
+
+                if lowest in visited_nodes:
+                    continue
+
+                for node1, weight1 in lowest.adjacent.items():
+                    print(f'Node: {node1.name} | Weight: {weight1}')
+                if weight < lowest.adjacent[current_node]:
+                    lowest = node
+
+            if lowest is current:
+                print('Done')
+                break
+
+            current_node = lowest
+            visited_nodes.add(current)
+            lowest = None
+            print(current, '--->', end=' ')
+
+
+
+def create_city_graph(): # NOTE: Used chatGPT to create this function
     # Create a new graph object
     city_graph = Graph()
 
@@ -63,7 +86,7 @@ def create_city_graph(): # NOTE: Used chatGPT to create this function
     rome.add_edge(vienna, 480)
 
     madrid.add_edge(vienna, 730)
-    
+
     print(
             """+-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+
 |                 | London, England | Berlin, Germany |  Paris, France  |   Rome, Italy   |  Madrid, Spain  | Vienna, Austria |
@@ -90,5 +113,4 @@ def create_city_graph(): # NOTE: Used chatGPT to create this function
 
 graph = create_city_graph()
 
-graph.greedy('Rome, Italy') 
-
+print(graph.greedy('Rome, Italy'))
