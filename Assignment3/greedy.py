@@ -6,6 +6,7 @@ class Node:
     def add_edge(self, node, weight):
         self.adjacent[node] = weight
 
+
 class Graph:
     def __init__(self):
         self.nodes = {}
@@ -29,66 +30,69 @@ class Graph:
         visited_nodes = set()
         lowest = None
 
-        while True:
+        print(start_node.name, '--->', end=' ')
+        visited_nodes.add(start_node.name)
+
+        for x in range(6):
             for node, weight in current_node.adjacent.items():
+                if node.name in visited_nodes:
+                    continue
+
                 if lowest is None:
                     lowest = node
                     continue
 
-                if lowest in visited_nodes:
-                    continue
-
-                for node1, weight1 in lowest.adjacent.items():
-                    print(f'Node: {node1.name} | Weight: {weight1}')
                 if weight < lowest.adjacent[current_node]:
                     lowest = node
 
-            if lowest is current:
-                print('Done')
+            if lowest is None:
+                current_node = start_node
+                print(current_node.name)
                 break
+            else:
+                current_node = lowest
+                visited_nodes.add(current_node.name)
+                lowest = None
+                print(current_node.name, '--->', end=' ')
 
-            current_node = lowest
-            visited_nodes.add(current)
-            lowest = None
-            print(current, '--->', end=' ')
+    def get_node_names(self):
+        return list(self.nodes.keys())
 
 
+# create a new graph object
+graph = Graph()
 
-def create_city_graph(): # NOTE: Used chatGPT to create this function
-    # Create a new graph object
-    city_graph = Graph()
+# add nodes to the graph
+graph.add_node('London, England')
+graph.add_node('Berlin, Germany')
+graph.add_node('Paris, France')
+graph.add_node('Rome, Italy')
+graph.add_node('Madrid, Spain')
+graph.add_node('Vienna, Austria')
 
-    # Add the nodes to the graph
-    london = city_graph.add_node('London, England')
-    berlin = city_graph.add_node('Berlin, Germany')
-    paris = city_graph.add_node('Paris, France')
-    rome = city_graph.add_node('Rome, Italy')
-    madrid = city_graph.add_node('Madrid, Spain')
-    vienna = city_graph.add_node('Vienna, Austria')
+# add edges to the graph
+graph.add_edge('London, England', 'Berlin, Germany', 325)
+graph.add_edge('London, England', 'Paris, France', 160)
+graph.add_edge('London, England', 'Rome, Italy', 280)
+graph.add_edge('London, England', 'Madrid, Spain', 250)
+graph.add_edge('London, England', 'Vienna, Austria', 425)
 
-    # Add the edges between the nodes with the specified weights
-    london.add_edge(berlin, 325)
-    london.add_edge(paris, 160)
-    london.add_edge(rome, 280)
-    london.add_edge(madrid, 250)
-    london.add_edge(vienna, 425)
+graph.add_edge('Berlin, Germany', 'Paris, France', 415)
+graph.add_edge('Berlin, Germany', 'Rome, Italy', 550)
+graph.add_edge('Berlin, Germany', 'Madrid, Spain', 675)
+graph.add_edge('Berlin, Germany', 'Vienna, Austria', 375)
 
-    berlin.add_edge(paris, 415)
-    berlin.add_edge(rome, 550)
-    berlin.add_edge(madrid, 675)
-    berlin.add_edge(vienna, 375)
+graph.add_edge('Paris, France', 'Rome, Italy', 495)
+graph.add_edge('Paris, France', 'Madrid, Spain', 215)
+graph.add_edge('Paris, France', 'Vienna, Austria', 545)
 
-    paris.add_edge(rome, 495)
-    paris.add_edge(madrid, 215)
-    paris.add_edge(vienna, 545)
+graph.add_edge('Rome, Italy', 'Madrid, Spain', 380)
+graph.add_edge('Rome, Italy', 'Vienna, Austria', 480)
 
-    rome.add_edge(madrid, 380)
-    rome.add_edge(vienna, 480)
+graph.add_edge('Madrid, Spain', 'Vienna, Austria', 730)
 
-    madrid.add_edge(vienna, 730)
-
-    print(
-            """+-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+
+print("""
++-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+
 |                 | London, England | Berlin, Germany |  Paris, France  |   Rome, Italy   |  Madrid, Spain  | Vienna, Austria |
 +-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+
 | London, England |      ------     |       325       |       160       |       280       |       250       |       425       |
@@ -102,15 +106,20 @@ def create_city_graph(): # NOTE: Used chatGPT to create this function
 |  Madrid, Spain  |       250       |       675       |       215       |       380       |      ------     |       730       |
 +-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+
 | Vienna, Austria |       425       |       375       |        545      |        480      |       730       |      ------     |
-+-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+"""
-    )
++-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+
+"""
+)
 
-    # Return the completed graph
-    return city_graph
+list = graph.get_node_names()
+
+for index, name in enumerate(list):
+    print(f'{index + 1}. {name}')
+print()
+
+try:
+    start = int(input('==> Which node do you want to start at?: ')) - 1
+    graph.greedy(list[start])
+except:
+    print('Please enter a valid number')
 
 
-
-
-graph = create_city_graph()
-
-print(graph.greedy('Rome, Italy'))
