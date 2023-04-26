@@ -110,6 +110,8 @@ print("""
 """
 )
 
+print('Using Greedy Algorithm')
+
 list = graph.get_node_names()
 
 for index, name in enumerate(list):
